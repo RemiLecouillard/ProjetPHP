@@ -1,6 +1,10 @@
 <?php
 //Fonction qui renvoie une erreur
-
+function validiteChaine($ch){
+if(alphabetFr($ch) && caractereExist($ch))
+	return true;
+else return false;
+}
 // Seul l'alphabet français, les accents français, les apostrophe, tirets et espaces sont autorisés
 function alphabetFr($ch){
 	
@@ -35,8 +39,13 @@ function plsrsDoubleTiretNom($ch){
 }
 
 
-//Fonctions de transformation de la chaine
-
+//Fonctions de transformation de la chaine ----------------------------------------------------------------------------
+function traitementChaine($ch){
+	$ch=plsrsApostrophes($ch);
+	$ch=plsrsEspaces($ch);
+	$ch=SupprimeEspaceAutourTiret($ch);
+	return $ch;
+}
 //Tous
 //Les premiers et derniers termes doivent être des lettres ou des apostrophes
 function premierTerme($ch){
