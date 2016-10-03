@@ -1,6 +1,7 @@
 <?php
-//Fonction qui renvoi une erreur
-//On n'accepte pas les chaînes avec des caractères autres que l'alphabet normal français, les accents français, les apostrophe, tirets et espaces
+//Fonction qui renvoie une erreur
+
+// Seul l'alphabet français, les accents français, les apostrophe, tirets et espaces sont autorisés
 function alphabetFr($ch){
 	
 	if(preg_match("/[^-a-zA-Z0-9àâäéèêëïîôöùûü -']/", $ch)){
@@ -10,7 +11,7 @@ function alphabetFr($ch){
 	else return true;
 }
 
-//Si la chaîne n'a que des caractères tels que l'apostrophe ou le tiret qui sont utilisés (soit aucune lettre) alors la chaîne est fausse
+//La chaine doit contenir des lettres
 function caractereExist($ch){
 	if(preg_match("/[-a-zA-Z0-9àâäéèêëïîôöùûü]/", $ch)){
 	return true;
@@ -21,7 +22,7 @@ function caractereExist($ch){
 //faire double tiret interdit
 
 
-//S'il y a plusieurs double tirets, la chaîne est interdite
+//S'il y a plusieurs doubles tirets, la chaîne est interdite
 function plsrsDoubleTiretNom($ch){
 		
 		$tab = explode("--", $ch);
@@ -37,6 +38,7 @@ function plsrsDoubleTiretNom($ch){
 //Fonctions de transformation de la chaine
 
 //Tous
+//Les premiers et derniers termes doivent être des lettres ou des apostrophes
 function premierTerme($ch){
 	$ch2 = $ch;
 	while(strpos($ch2, " ") === 0 || strpos($ch2, "-") === 0 || strrpos($ch2, " ") == strlen($ch2)-1 || strrpos($ch2, "-") == strlen($ch2)-1){
@@ -46,7 +48,7 @@ function premierTerme($ch){
 	return $ch2;
 }
 
-//S'il y a plusieurs apostrophes, on les remplace par une simple
+//S'il y a plusieurs apostrophes ils sont remplacés par une simple
 function plsrsApostrophes($ch){
 	
 if(strpbrk( "/[']{2,}/",$ch) ){
@@ -57,7 +59,8 @@ if(strpbrk( "/[']{2,}/",$ch) ){
 	return $ch2;
 	
 }
-//S'il y a plusieurs espaces, on les remplace par un seul
+
+//S'il y a plusieurs espaces ils sont remplacés par un seul
 function plsrsEspaces($ch){
 if(strpbrk( "/[[:space:]]{2,}/",$ch) ){
 	$ch2=preg_replace ( "/[[:space:]]{2,}/", " ", $ch);
@@ -66,6 +69,8 @@ if(strpbrk( "/[[:space:]]{2,}/",$ch) ){
 	return $ch2;
 	
 }
+
+//Les espaces autour d'un tiret ou double tiret sont supprimés
 function SupprimeEspaceAutourTiret($ch){
 
 	$tab = explode("-", $ch);
@@ -78,6 +83,7 @@ function SupprimeEspaceAutourTiret($ch){
 
 //Nom
 
+//S'il y a plus de deux tirets, ils sont remplacés par un double tiret
 function doubleTiretNom($ch){
 		
 	if(strpbrk( "/[-]{3,}/",$ch) ){
@@ -90,7 +96,7 @@ function doubleTiretNom($ch){
 }
 
 
-//S'il y a des lettres avec accent, on enlève les accents, puis on met le nom en majuscule
+//S'il y a des lettres avec accent, on enlève les accents. Le nom est mis en majuscule
 function nomMaj($ch){
 	
 	if(preg_match("/[àâäéèêëïîôöùûü]/", $ch)){
@@ -119,7 +125,7 @@ function prenomMaj($ch){
 		$ch=tiretMaj($ch);
 	
 	}
-	if(preg_match("'", $ch)){ 
+	if(preg_match("/'/", $ch)){ 
 		$ch=apostropheMaj($ch);
 	
 	}
@@ -131,6 +137,7 @@ function prenomMaj($ch){
 	
 }
 
+	//Pour chaque terme suivant un apostrophe, on le met en majuscule 
 
 function apostropheMaj($ch){
 	$tab = explode("'", $ch);
@@ -158,6 +165,8 @@ function apostropheMaj($ch){
 	else return $ch;
 	}
 
+	
+	//Pour chaque terme suivant un tiret, on le met en majuscule 
 	function tiretMaj($ch){
 		
 	$tab = explode("-", $ch);
@@ -171,7 +180,7 @@ function apostropheMaj($ch){
 
 	}
 
-	//Pour chaque terme suivant un espace, on le met en majuscule (pour le prénom)
+	//Pour chaque terme suivant un espace, on le met en majuscule 
 function espaceMaj($ch){
 	
 $tab = explode(" ", $ch);
