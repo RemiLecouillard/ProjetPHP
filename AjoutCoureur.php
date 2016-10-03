@@ -17,10 +17,6 @@ nom, prenom, année nais, code tdf(pays), annee premier tour
 
 		<label for="pays"> Pays : </label>
 		<select name="pays" id="pays">
-			<?php
-
-			creerListe();
-			?>
 			<option value="FRA">
 				France
 			</option>
@@ -43,23 +39,6 @@ nom, prenom, année nais, code tdf(pays), annee premier tour
 		<input name="envoyer" id="envoyer" type="submit"/>
 
 	</form>
-
-<?php
-
-function creerListe($bdd,$sql,$table, $form){
-	$reponse = $bdd->query($sql);
-	while ($donnees = $reponse->fetch())
-	{
-		echo '<option value="' . $donnees[$table] . '" ' ;
-		VerifSelect($form, $donnees[$table]);
-		echo  ' >'.$donnees[$table] . '</option>';
-	}
-	$reponse->closeCursor();
-}
-
-
-?>
-
 
 
 </html>
