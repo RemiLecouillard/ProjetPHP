@@ -7,13 +7,16 @@ function traiterNom($ch){
 			if(plsrsDoubleTiretNom($ch)){
 				$ch=traitementChaine($ch);
 				$ch=nomMaj($ch);
-				echo $ch;
+				$ch=doubleTiretNom($ch);
+				$ch=premierTerme($ch);
+				$ch=SupprimeEspaceAutourTiret($ch);
+				return $ch;
 			}
 			else
-				echo "invalide";
+				return "-1";
 	}
 	else
-		echo "invalide chaine";
+		return "-1";
 }
 
 ?>

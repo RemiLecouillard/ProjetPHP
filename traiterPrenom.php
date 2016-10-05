@@ -6,12 +6,14 @@ function traiterPrenom($ch){
 		if(doubleTiretInterdit($ch)){
 			$ch=traitementChaine($ch);
 			$ch=prenomMaj($ch);
-			echo $ch;
+			$ch=premierTerme($ch);
+			$ch=SupprimeEspaceAutourTiret($ch);
+			return $ch;
 			}
 			else
-				echo "invalide";
+				return "-1";
 	}
 	else
-		echo "invalide";
+		return "-1";
 }
 ?>

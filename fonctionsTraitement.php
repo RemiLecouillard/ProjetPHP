@@ -7,8 +7,7 @@ function validiteChaine($ch){
 }
 // Seul l'alphabet français, les accents français, les apostrophe, tirets et espaces sont autorisés
 function alphabetFr($ch){
-	if(preg_match("/[^a-zA-Z0-9àâäéèêëïîôöùûüçÉÈÊËÎÏÔÖÛÜÙÂÀÄÜÛÙ' -]|[!$%&]/", $ch)){
-		echo "invalide alpha";
+	if(preg_match("/[^a-zA-Z0-9àâäéèêëïîôöùûüçÉÈÊËÎÏÔÖÛÜÙÂÀÄ' -]|[!$%&]/", $ch)){
 		return false;
 	}
 	else{ return true;}
@@ -17,11 +16,10 @@ function alphabetFr($ch){
 //La chaine doit contenir des lettres
 function caractereExist($ch){
 	if(preg_match("/[-a-zA-Z0-9àâäéèêëïîôöùûü]/", $ch)){
-		//echo "caracExTrue ";
 	return true;
 	
 	}
-	else{  echo "invalide crac"; return false;}
+	else{ return false;}
 }
 //faire double tiret interdit
 function doubleTiretInterdit($ch){
@@ -122,9 +120,9 @@ function doubleTiretNom($ch){
 //S'il y a des lettres avec accent, on enlève les accents. Le nom est mis en majuscule
 function nomMaj($ch){
 	$ch2 = $ch;
-	if(preg_match("/[àâäéèêëïîôöùûü]/", $ch)){
-		$accent = array('/à/','/â/','/ä/','/é/','/è/','/ê/','/ë/','/ï/','/î/','/ô/','/ö/','/ù/','/û/','/ü/');
-		$replace = array('a','a','a','e','e','e','e','i','i','o','o','u','u','u');
+	if(preg_match("/[àâäéèêëïîôöùûüÉÈÊËÎÏÔÖÛÜÙÂÀÄ]/", $ch)){
+		$accent = array('/à/','/â/','/ä/','/é/','/è/','/ê/','/ë/','/ï/','/î/','/ô/','/ö/','/ù/','/û/','/ü/', '/É/', '/È/', '/Ê/', '/Ë/', '/Î/', '/Ï/', '/Ô/', '/Ö/', '/Û/', '/Ü/', '/Ù/', '/Â/', '/À/', '/Ä/');
+		$replace = array('a','a','a','e','e','e','e','i','i','o','o','u','u','u', 'E', 'E', 'E', 'E', 'I', 'I', 'O', 'O', 'U', 'U', 'U', 'A', 'A', 'A', 'I', 'I');
 		$ch2 = preg_replace($accent,$replace,$ch);
 
 	}
@@ -139,23 +137,25 @@ function nomMaj($ch){
 //sinon on met seulement la première lettre en majuscule
 //On enlève l'accent de la première lettre pour le mettre en majuscule
 function prenomMaj($ch){
-	
+	$ch = mettreMinuscule($ch);
 	if(preg_match("/[[:space:]]/", $ch)){
 		$ch=espaceMaj($ch);
 	}
-	
+
 	if(preg_match('/-/', $ch)){ 
 		$ch=tiretMaj($ch);
 	
 	}
+
 	if(preg_match("/'/", $ch)){ 
 		$ch=apostropheMaj($ch);
-	
 	}
+
 	else {
-		$ch=ucfirst($ch);
 		$ch=premiereLettreAccent($ch);
+		$ch=ucfirst($ch);
 	}
+
 	return $ch;
 	
 }
@@ -175,14 +175,21 @@ function apostropheMaj($ch){
 	return $ch2;
 
 }
+function mettreMinuscule($ch){
+		$accent = array('/É/', '/È/', '/Ê/', '/Ë/', '/Î/', '/Ï/', '/Ô/', '/Ö/', '/Û/', '/Ü/', '/Ù/', '/Â/', '/À/', '/Ä/');
+		$replace = array('é','è','ê','ë', 'î', 'ï', 'ô', 'ö', 'û', 'ü', 'ù', 'â', 'à', 'ä');
+		$ch = preg_replace($accent,$replace,$ch);
+		$ch = strtolower($ch);
+		return $ch;
+}
 
 //Cette fonction sert pour la mise en majuscule --> On remplace les accents par les lettres correspondantes
 function premiereLettreAccent($ch){
 	if(preg_match("/^[àâäéèêëïîôöùûü]/", $ch)){
-		$accent = array('/^à/','/^â/','/^ä/','/^é/','/^è/','/^ê/','/^ë/','/^ï/','/^î/','/^ô/','/^ö/','/^ù/','/^û/','/^ü/');
-		$replace = array('a','a','a','e','e','e','e','i','i','o','o','u','u','u');
+		$accent = array('/^à/','/^â/','/^ä/','/^é/','/^è/','/^ê/','/^ë/','/^ï/','/^î/','/^ô/','/^ö/','/^ù/','/^û/','/^ü/', '/^É/', '/^È/', '/^Ê/', '/^Ë/', '/^Î/', '/^Ï/', '/^Ô/', '/^Ö/', '/^Û/', '/^Ü/', '/^Ù/', '/^Â/', '/^À/', '/^Ä/');
+		$replace = array('a','a','a','e','e','e','e','i','i','o','o','u','u','u', 'E', 'E', 'E', 'E', 'I', 'I', 'O', 'O', 'U', 'U', 'U', 'A', 'A', 'A', 'I', 'I');
 		$ch2 = preg_replace($accent,$replace,$ch);
-
+		$ch2 = strtolower($ch2);
 		return $ch2;
 	}
 	else return $ch;
