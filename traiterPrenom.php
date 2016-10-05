@@ -2,7 +2,7 @@
 
 function traiterPrenom($ch){
 	if(!validiteChaine($ch)){
-		if(doubleTiretInterdit($ch))
+		if(doubleTiretInterdit($ch)){
 			$ch=traitementChaine($ch);
 			$ch=prenomMaj($ch);
 			echo $ch;
@@ -12,6 +12,5 @@ function traiterPrenom($ch){
 	}
 	else
 		echo "invalide";
-	
 }
 ?>

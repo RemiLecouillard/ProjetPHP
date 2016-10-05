@@ -13,7 +13,6 @@ function traiterNom($ch){
 	}
 	else
 		echo "invalide";
-	
 }
 
 ?>
