@@ -1,5 +1,6 @@
 <?php
 function traiterNom($ch){
+	$ch = transfoApos($ch);
 	if(validiteChaine($ch)){
 		
 		doubleTiretNom($ch);
@@ -12,7 +13,7 @@ function traiterNom($ch){
 				echo "invalide";
 	}
 	else
-		echo "invalide";
+		echo "invalide chaine";
 }
 
 ?>

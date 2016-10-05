@@ -7,21 +7,21 @@ function validiteChaine($ch){
 }
 // Seul l'alphabet français, les accents français, les apostrophe, tirets et espaces sont autorisés
 function alphabetFr($ch){
-	
-	if(preg_match("/[^-a-zA-Z0-9àâäéèêëïîôöùûü -']/", $ch)){
-	return false;
-	
+	if(preg_match("/[^a-zA-Z0-9àâäéèêëïîôöùûüçÉÈÊËÎÏÔÖÛÜÙÂÀÄÜÛÙ' -]|[!$%&]/", $ch)){
+		echo "invalide alpha";
+		return false;
 	}
-	else return true;
+	else{ return true;}
 }
 
 //La chaine doit contenir des lettres
 function caractereExist($ch){
 	if(preg_match("/[-a-zA-Z0-9àâäéèêëïîôöùûü]/", $ch)){
+		//echo "caracExTrue ";
 	return true;
 	
 	}
-	else return false;
+	else{  echo "invalide crac"; return false;}
 }
 //faire double tiret interdit
 function doubleTiretInterdit($ch){
@@ -53,6 +53,13 @@ function traitementChaine($ch){
 	return $ch;
 }
 //Tous
+
+function transfoApos($ch){
+	$apo = array('\'');
+	$truc = array('/‘/');
+	$ch2 = preg_replace($truc, $apo, $ch);
+	return $ch2;
+}
 //Les premiers et derniers termes doivent être des lettres ou des apostrophes
 function premierTerme($ch){
 	$ch2 = $ch;
@@ -77,6 +84,7 @@ function plsrsApostrophes($ch){
 
 //S'il y a plusieurs espaces ils sont remplacés par un seul
 function plsrsEspaces($ch){
+	$ch2 = $ch;
 	if(strpbrk( "/[[:space:]]{2,}/",$ch) ){
 		$ch2=preg_replace ( "/[[:space:]]{2,}/", " ", $ch);
 	}
