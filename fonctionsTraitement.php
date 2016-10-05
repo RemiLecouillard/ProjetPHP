@@ -1,4 +1,4 @@
-<?php
+ <?php
 //Fonction qui renvoie une erreur
 function validiteChaine($ch){
 	if(alphabetFr($ch) && caractereExist($ch))
