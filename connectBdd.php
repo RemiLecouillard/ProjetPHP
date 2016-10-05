@@ -6,7 +6,7 @@ $dbPass = "61vaximer";
 $connect = connectPdo($db, $dbUserName, $dbPass);
 
 if($connect){
-	$requete="INSERT INTO :table VALUES();";
+	$requete="INSERT INTO :table VALUES(); ";
 	
 }
 
