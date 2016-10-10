@@ -19,7 +19,8 @@ function caractereExist($ch){
 	return true;
 	
 	}
-	else{ return false;}
+	else{
+		return false;}
 }
 //faire double tiret interdit
 function doubleTiretInterdit($ch){
@@ -71,8 +72,8 @@ function premierTerme($ch){
 //S'il y a plusieurs apostrophes ils sont remplacés par une simple
 function plsrsApostrophes($ch){
 	$ch2 = $ch;
-	if(strpbrk( "/[']{2,}/",$ch) ){
-		$ch2=preg_replace ( "/[']{2,}/", "'", $ch);
+	if(strpbrk( "/[']{2,}/",$ch2) ){
+		$ch2=preg_replace ( "/[']{2,}/", "'", $ch2);
 		}
 
 	
@@ -83,8 +84,8 @@ function plsrsApostrophes($ch){
 //S'il y a plusieurs espaces ils sont remplacés par un seul
 function plsrsEspaces($ch){
 	$ch2 = $ch;
-	if(strpbrk( "/[[:space:]]{2,}/",$ch) ){
-		$ch2=preg_replace ( "/[[:space:]]{2,}/", " ", $ch);
+	if(strpbrk( "/[[:space:]]{2,}/",$ch2) ){
+		$ch2=preg_replace ( "/[[:space:]]{2,}/", " ", $ch2);
 	}
 	
 	return $ch2;
@@ -107,8 +108,8 @@ function SupprimeEspaceAutourTiret($ch){
 //S'il y a plus de deux tirets, ils sont remplacés par un double tiret
 function doubleTiretNom($ch){
 	$ch2 = $ch;
-	if(strpbrk( "/[-]{3,}/",$ch) ){
-		$ch2=preg_replace ( "/[-]{3,}/", "--", $ch);
+	if(strpbrk( "/[-]{3,}/",$ch2) ){
+		$ch2=preg_replace ( "/[-]{3,}/", "--", $ch2);
 		}
 
 

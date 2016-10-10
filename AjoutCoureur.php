@@ -1,5 +1,4 @@
 <html>
-nom, prenom, année nais, code tdf(pays), annee premier tour
 	<meta charset='UTF-8'/>
 
 	<form method="post" action= "<?php $_SERVER['PHP_SELF'] ?>" enctype="application/x-www-form-urlencoded" name="ajoutTache">
@@ -39,6 +38,6 @@ nom, prenom, année nais, code tdf(pays), annee premier tour
 		<input name="envoyer" id="envoyer" type="submit"/>
 
 	</form>
-
+	<?php include("traiterAjoutCoureur.php"); ?>
 
 </html>

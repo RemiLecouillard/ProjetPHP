@@ -8,9 +8,9 @@ $ch = strtoupper("àâäéèêëïîôöùûü");
 echo $ch;
 function test($ch){
 	echo "<td>".$ch."</td><td>";
-	traiterNom($ch);
+	echo traiterNom($ch);
 	echo "</td><td>";
-	traiterPrenom($ch);
+	echo traiterPrenom($ch);
 	echo "</td></tr>";
 }
 if(alphabetFr("é-bé"))
@@ -43,8 +43,9 @@ test("aa—bb—cc");
 test("A ‘ ‘ b");
 test("A ‘‘ b");
 test("bénard     ébert");
-test("àpàààp")
-
-
+test("àpàààp");
+test("--- - - - -   Êbde-àDjndsdn    'Âhjghj---  ");
+test("- SigMNd-BOuAkAr'-");
+test("---------");
 
 ?>
