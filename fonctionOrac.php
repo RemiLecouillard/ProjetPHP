@@ -40,6 +40,56 @@ function ExecuterRequete($cur)
   return $r;
 }
 //---------------------------------------------------------------------------------------------
+function LireDonnees3($cur,&$tab)
+{
+  $nbLignes = 0;
+  $i=0;
+  while ($row = oci_fetch ($cur)) 
+  {    
+	$tab[$nbLignes][$i] = oci_result($cur,'VAL'); // respecter la casse
+    $tab[$nbLignes][$i+1] = oci_result($cur,'TYPE');
+	$tab[$nbLignes][$i+2] = oci_result($cur,'COULEUR');
+	$nbLignes++;
+  }
+  return $nbLignes;
+}
+//---------------------------------------------------------------------------------------------
+function LireDonnees1($cur,&$tab)
+{
+  $nbLignes = oci_fetch_all($cur, $tab,0,-1,OCI_ASSOC); //OCI_FETCHSTATEMENT_BY_ROW, OCI_ASSOC, OCI_NUM
+  return $nbLignes;
+}
+//---------------------------------------------------------------------------------------------
+// fonctions autres
+function AfficherDonnee1($tab,$nbLignes)
+{
+  if ($nbLignes > 0) 
+  {
+    echo "<table border=\"1\">\n";
+    echo "<tr>\n";
+    foreach ($tab as $key => $val)  // lecture des noms de colonnes
+    {
+      echo "<th>$key</th>\n";
+    }
+    echo "</tr>\n";
+    for ($i = 0; $i < $nbLignes; $i++) // balayage de toutes les lignes
+    {
+      echo "<tr>\n";
+      foreach ($tab as $data) // lecture des enregistrements de chaque colonne
+	  {
+        echo "<td>$data[$i]</td>\n";
+      }
+      echo "</tr>\n";
+    }
+    echo "</table>\n";
+  } 
+  else 
+  {
+    echo "Pas de ligne<br />\n";
+  } 
+  echo "$nbLignes Lignes lues<br />\n";
+}
+//---------------------------------------------------------------------------------------------
 function FermerConnexion($conn)
 {
   oci_close($conn);

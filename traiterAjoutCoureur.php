@@ -5,7 +5,14 @@ include("fonctionsTraitement.php");
 include("fonctionOrac.php");
 
 function calculerNumeroCoureur(){
-
+	$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
+	$req = "SELECT max(n_coureur)+1 FROM tdf_coureur";
+	$cur = PreparerRequete($conn,$req);
+	$res = ExecuterRequete($cur);
+	$nb = LireDonnees1($cur,$donnees);
+	$committed = oci_commit($conn);
+	FermerConnexion($conn);
+	return $donnees['MAX(N_COUREUR)+1'][0];
 }
 
 if(isset($_POST["envoyer"])){
@@ -19,17 +26,20 @@ if(isset($_POST["envoyer"])){
 			$nom = traiterNom($nom);
 			if($prenom != "-1" && $nom != "-1"){
 				if($prenom != $_POST["prenom"])
-					echo "Le prénom que vous avez rentrez a été modifier en ".$prenom."</br>";
+					echo "Le prénom que vous avez rentré a été modifié en ".$prenom."</br>";
 				if($nom != $_POST["nom"])
-					echo "Le nom que vous avez rentrez a été modifier en ".$nom."</br>";
+					echo "Le nom que vous avez rentré a été modifié en ".$nom."</br>";
 				
 
 				//Insertion dans la base
 				$code = calculerNumeroCoureur();
-				 $conn = OuvrirConnexion('ETU2_62', 'remixav2016','info');
-				 $req = "Insert into coureur(n_coureur, nom, prenom, code_tdf, annee_naissance, annee_prem) values ('".$code."','".$nom."','".$prenom."','".$_POST["pays"]."','".$_POST["anneeNais"]."','".$_POST["anneePrem"]"');";
-				// $cur = PreparerRequete($conn,$req);
-				// ExecuterRequete($cur);
+				$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
+				$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, annee_naissance, annee_prem) values (".$code.",'".$nom."','".$prenom."','".$_POST["pays"]."',".$_POST["anneeNais"].",".$_POST["anneePrem"].")";
+				echo $req."</br>";
+				$req = utf8_decode($req);
+				echo $req;
+				$cur = PreparerRequete($conn,$req);
+				ExecuterRequete($cur);
 			}
 			else{
 				if($prenom == "-1")

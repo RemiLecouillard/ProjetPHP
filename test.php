@@ -1,9 +1,9 @@
 <?php
-include("fonctionsTraitement.php");
-
-include("traiterNom.php");
-include("traiterPrenom.php");
-echo transfoApos("‘");
+//include("fonctionsTraitement.php");
+include("traiterAjoutCoureur.php");
+//include("traiterNom.php");
+//include("traiterPrenom.php");
+/*echo transfoApos("‘");
 $ch = strtoupper("àâäéèêëïîôöùûü");
 echo $ch;
 function test($ch){
@@ -12,19 +12,10 @@ function test($ch){
 	echo "</td><td>";
 	echo traiterPrenom($ch);
 	echo "</td></tr>";
-}
-if(alphabetFr("é-bé"))
-	echo "vrai ";
-else
-	echo "faux ";
-if(validiteChaine("Ébé-ébé"))
-	echo "valide ";
-else
-	echo "non valide ";
-
+}*/
 
 echo "<meta charset='UTF-8'/>";
-echo "<table> <tr> <th>Truc</th> <th>NOM</th> <th>Prenom</th</tr><tr>";
+/*echo "<table> <tr> <th>Truc</th> <th>NOM</th> <th>Prenom</th</tr><tr>";
 test("Départ");
 test("Ébé-ébé");
 test("ébé-ébé");
@@ -46,6 +37,19 @@ test("bénard     ébert");
 test("àpàààp");
 test("--- - - - -   Êbde-àDjndsdn    'Âhjghj---  ");
 test("- SigMNd-BOuAkAr'-");
-test("---------");
-
+test("---------");*/
+echo calculerNumeroCoureur();
+				$code = calculerNumeroCoureur();
+				$nom = "Fremont";
+				$prenom = "Xaviere";
+				$date1 = "10/10/1980";
+				$date2 = "10/10/2000";
+				$pays = "FRA";
+				$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
+				$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, annee_naissance, annee_prem) values (".$code.",'".$nom."','".$prenom."','".$pays."',".$date1.",".$date2.")";
+				echo $req."</br>";
+				$req = utf8_decode($req);
+				echo $req;
+				$cur = PreparerRequete($conn,$req);
+				ExecuterRequete($cur);
 ?>
