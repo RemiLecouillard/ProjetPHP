@@ -12,7 +12,11 @@ function traiterNom($ch){
 				$ch=nomMaj($ch);
 				$ch=doubleTiretNom($ch);
 				$ch=SupprimeEspaceAutourTiret($ch);
-				return $ch;
+				if(longChaine($ch)){
+					return $ch;
+					}
+				else
+					return "-1";
 			}
 			else
 				return "-1";

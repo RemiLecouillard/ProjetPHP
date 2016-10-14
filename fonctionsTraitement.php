@@ -43,6 +43,14 @@ function plsrsDoubleTiretNom($ch){
 			return true;
 }
 
+//Verification de la longueur après toutes les transformations
+function longChaine($ch){
+
+	if(iconv_strlen($ch)>31)
+		return false;
+	else return true;
+
+}
 
 //Fonctions de transformation de la chaine ----------------------------------------------------------------------------
 function traitementChaine($ch){
