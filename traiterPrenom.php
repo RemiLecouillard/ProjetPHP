@@ -9,12 +9,17 @@ function traiterPrenom($ch){
 				$ch=traitementChaine($ch);
 				$ch=prenomMaj($ch);
 				$ch=SupprimeEspaceAutourTiret($ch);
-				return $ch;
+				if(longChaine($ch)){
+					return $ch;
 				}
 				else
 					return "-1";
 			}
-		return "-1";
+			else
+				return "-1";
+		}
+		else
+			return "-1";
 	}
 	else
 		return "-1";

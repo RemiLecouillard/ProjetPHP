@@ -37,6 +37,7 @@ test("éé''éé--uù  gg");
 test("DE LA TR€UC");
 test("DE LA TRUC");
 test("ééééééééééééééééééééééééééééééééééééééééééééééé");
+test("éééééééééééééééééééééééééééééé"); //30 caractères
 test("-pééron-de - la   branche-");
 test("'");
 test("aa—bb—cc");
