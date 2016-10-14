@@ -4,6 +4,10 @@ include("traiterNom.php");
 include("fonctionsTraitement.php");
 include("fonctionOrac.php");
 
+function calculerNumeroCoureur(){
+
+}
+
 if(isset($_POST["envoyer"])){
 	if(!empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["anneeNais"]) && !empty($_POST["pays"]) && !empty($_POST["anneePrem"])){
 		$nom = $_POST["nom"];
@@ -19,9 +23,11 @@ if(isset($_POST["envoyer"])){
 				if($nom != $_POST["nom"])
 					echo "Le nom que vous avez rentrez a été modifier en ".$nom."</br>";
 				
+
 				//Insertion dans la base
-				// $conn = OuvrirConnexion('ETU2_62', 'remixav2016','info');
-				// $req = "Insert into  ";
+				$code = calculerNumeroCoureur();
+				 $conn = OuvrirConnexion('ETU2_62', 'remixav2016','info');
+				 $req = "Insert into coureur(n_coureur, nom, prenom, code_tdf, annee_naissance, annee_prem) values ('".$code."','".$nom."','".$prenom."','".$_POST["pays"]."','".$_POST["anneeNais"]."','".$_POST["anneePrem"]"');";
 				// $cur = PreparerRequete($conn,$req);
 				// ExecuterRequete($cur);
 			}
