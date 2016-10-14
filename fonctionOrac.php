@@ -30,7 +30,7 @@ function PreparerRequete($conn,$req)
 function ExecuterRequete($cur)
 {
   $r = oci_execute($cur, OCI_DEFAULT);
-  echo "<br>résultat de la requête: $r<br />";
+  //echo "<br>résultat de la requête: $r<br />";
   if (!$r) 
   {  
 	$e = oci_error($stid);  

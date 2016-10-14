@@ -11,7 +11,7 @@
 		</br>
 
 		<label for="anneeNais"> Année de Naissance : </label>
-		<input name="anneeNais" id="anneeNaiss" type="date" placeholder="JJ/MM/AAAA"/>
+		<input name="anneeNais" id="anneeNaiss" type="number" />
 		</br>
 
 		<label for="pays"> Pays : </label>
@@ -32,7 +32,7 @@
 		</br>
 
 		<label for="anneePrem"> Année du premier tour : </label>
-		<input name="anneePrem" id="anneePrem" type="date" placeholder="JJ/MM/AAAA"/>
+		<input name="anneePrem" id="anneePrem" type="number" />
 		</br>
 
 		<input name="envoyer" id="envoyer" type="submit"/>

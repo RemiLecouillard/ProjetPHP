@@ -39,12 +39,26 @@ test("àpàààp");
 test("--- - - - -   Êbde-àDjndsdn    'Âhjghj---  ");
 test("- SigMNd-BOuAkAr'-");
 test("---------");*/
-echo calculerNumeroCoureur();
+// fonction principale -------------------------------------------------------------------
+/*echo "<PRE>";
+echo "Coonnexion à la base<br>";
+$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
+echo "<br>identifiant : $conn<hr>";
+
+$req = "INSERT INTO bidon VALUES(:r2,'écumoire','grise') returning ROWID into :rid ";
+$cur = PreparerRequete($conn,$req);
+oci_bind_by_name($cur,":rid",$rid, 32);
+oci_bind_by_name($cur,":r2",$r2, 32);
+$r2=70;
+$res = ExecuterRequete($cur);
+$r2=88;
+$res = ExecuterRequete($cur);
+echo "Nouvelle donnée insérée :$rid <hr />";*/
 				$code = calculerNumeroCoureur();
 				$nom = "Fremont";
 				$prenom = "Xaviere";
-				$date1 = "10/10/1980";
-				$date2 = "10/10/2000";
+				$date1 = 1980;
+				$date2 = 2000;
 				$pays = "FRA";
 				$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
 				$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, annee_naissance, annee_prem) values (".$code.",'".$nom."','".$prenom."','".$pays."',".$date1.",".$date2.")";
@@ -52,5 +66,7 @@ echo calculerNumeroCoureur();
 				$req = utf8_decode($req);
 				echo $req;
 				$cur = PreparerRequete($conn,$req);
-				ExecuterRequete($cur);
+				$res = ExecuterRequete($cur);
+				$committed = oci_commit($conn);
+				FermerConnexion($conn);
 ?>

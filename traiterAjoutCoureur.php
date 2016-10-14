@@ -35,11 +35,11 @@ if(isset($_POST["envoyer"])){
 				$code = calculerNumeroCoureur();
 				$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
 				$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, annee_naissance, annee_prem) values (".$code.",'".$nom."','".$prenom."','".$_POST["pays"]."',".$_POST["anneeNais"].",".$_POST["anneePrem"].")";
-				echo $req."</br>";
 				$req = utf8_decode($req);
-				echo $req;
 				$cur = PreparerRequete($conn,$req);
-				ExecuterRequete($cur);
+				$res = ExecuterRequete($cur);
+				$committed = oci_commit($conn);
+				FermerConnexion($conn);
 			}
 			else{
 				if($prenom == "-1")
