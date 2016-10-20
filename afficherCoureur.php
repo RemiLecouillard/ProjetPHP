@@ -35,6 +35,7 @@
 			<input name="dateInser" id="dateInser" type="date" />
 			</br>
 		</form>
+		
 	
 		<?php include("traiterAfficherCoureur.php"); ?>
 	</body>
