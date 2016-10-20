@@ -1,20 +1,23 @@
 <html>
 	<meta charset='UTF-8'/>
-
+	<head><link rel="stylesheet" href="designForm.css" type="text/CSS" /></head>
+	<div class="form-style-2">
+	<div class="form-style-2-heading">Ajout d'un coureur</div>
 	<form method="post" action= "<?php $_SERVER['PHP_SELF'] ?>" enctype="application/x-www-form-urlencoded" name="ajoutTache">
-		<label for="nom"> Nom : </label>
-		<input name="nom" id="nom"/>
+		
+		<label for="nom"><span>Nom : <span class="required">*</span></span>
+		<input name="nom" id="nom"/></label>
 		</br>
 
-		<label for="prenom"> Prenom : </label>
-		<input name="prenom" id="prenom"/>
+		<label for="prenom"><span>Prénom : <span class="required">*</span></span>
+		<input name="prenom" id="prenom"/></label>
 		</br>
 
-		<label for="anneeNais"> Année de Naissance : </label>
-		<input name="anneeNais" id="anneeNaiss" type="number" />
+		<label for="anneeNais"><span> Année de Naissance : </span>
+		<input name="anneeNais" id="anneeNaiss" type="number" /></label>
 		</br>
 
-		<label for="pays"> Pays : </label>
+		<label for="pays"><span> Pays : </span>
 		<select name="pays" id="pays">
 			<option value="FRA">
 				France
@@ -28,16 +31,16 @@
 			<option value="ALM">
 				Allemagne
 			</option>
-		</select>
-		</br>
+		</select></label>
 
-		<label for="anneePrem"> Année du premier tour : </label>
-		<input name="anneePrem" id="anneePrem" type="number" />
+		<label for="anneePrem"><span> Année du premier tour : </span>
+		<input name="anneePrem" id="anneePrem" type="number" /></label>
 		</br>
 
 		<input name="envoyer" id="envoyer" type="submit"/>
 
 	</form>
+	</div>
 	<?php include("traiterAjoutCoureur.php"); ?>
 
 </html>
