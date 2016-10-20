@@ -34,7 +34,10 @@
 			Date d'insertion :
 			<input name="dateInser" id="dateInser" type="date" />
 			</br>
+			
+			<input name="rechercher" id="rechercher" type="submit" value="rechercher"/>
 		</form>
+		
 	
 		<?php include("traiterAfficherCoureur.php"); ?>
 	</body>
