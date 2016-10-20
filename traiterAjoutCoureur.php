@@ -15,8 +15,25 @@ function calculerNumeroCoureur(){
 	return $donnees['MAX(N_COUREUR)+1'][0];
 }
 
+function regarderDejaPresent($nom, $prenom){
+	$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
+	$req = "SELECT count(*) FROM tdf_coureur where nom ='".$nom."' and prenom ='".$prenom."'";
+	echo $req;
+	$cur = PreparerRequete($conn,$req);
+	$res = ExecuterRequete($cur);
+	$nb = LireDonnees1($cur,$donnees);
+	$committed = oci_commit($conn);
+	FermerConnexion($conn);
+	echo $donnees['count(*)'][0];
+	if($donnees['count(*)'][0] == 0)
+		return false;
+	else
+		return true;
+}
+	
+
 if(isset($_POST["envoyer"])){
-	if(!empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["anneeNais"]) && !empty($_POST["pays"]) && !empty($_POST["anneePrem"])){
+	if(!empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["pays"])){
 		$nom = $_POST["nom"];
 		$prenom = $_POST["prenom"];
 		if($prenom == "lance" && $nom == "armstrong")
@@ -29,17 +46,32 @@ if(isset($_POST["envoyer"])){
 					echo "Le prénom que vous avez rentré a été modifié en ".$prenom."</br>";
 				if($nom != $_POST["nom"])
 					echo "Le nom que vous avez rentré a été modifié en ".$nom."</br>";
-				
+				if(!regarderDejaPresent($nom, $prenom)){
 
-				//Insertion dans la base
-				$code = calculerNumeroCoureur();
-				$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
-				$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, annee_naissance, annee_prem) values (".$code.",'".$nom."','".$prenom."','".$_POST["pays"]."',".$_POST["anneeNais"].",".$_POST["anneePrem"].")";
-				$req = utf8_decode($req);
-				$cur = PreparerRequete($conn,$req);
-				$res = ExecuterRequete($cur);
-				$committed = oci_commit($conn);
-				FermerConnexion($conn);
+					//Insertion dans la base
+					$code = calculerNumeroCoureur();
+					$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
+					
+					//création de la requete
+					$req = "";
+					if(!empty($_POST["anneeNais"]) && !empty($_POST["anneePrem"]))
+						$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, annee_naissance, annee_prem, DATE_INSERT, COMPTE_ORACLE) values (".$code.",'".$nom."','".$prenom."','".$_POST["pays"]."',".$_POST["anneeNais"].",".$_POST["anneePrem"].", sysdate, 'ETU2_58')";
+					else if(!empty($_POST["anneeNais"]))
+						$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, annee_naissance, DATE_INSERT, COMPTE_ORACLE) values (".$code.",'".$nom."','".$prenom."','".$_POST["pays"]."',".$_POST["anneeNais"].", sysdate, 'ETU2_58')";
+					else if(!empty($_POST["anneePrem"]))
+						$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, annee_prem, DATE_INSERT, COMPTE_ORACLE) values (".$code.",'".$nom."','".$prenom."','".$_POST["pays"]."',".$_POST["anneePrem"].", sysdate, 'ETU2_58')";
+					else
+						$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, DATE_INSERT, COMPTE_ORACLE) values (".$code.",'".$nom."','".$prenom."','".$_POST["pays"]."', sysdate, 'ETU2_58')";
+					echo $req;
+					$req = utf8_decode($req);
+					
+					$cur = PreparerRequete($conn,$req);
+					$res = ExecuterRequete($cur);
+					$committed = oci_commit($conn);
+					FermerConnexion($conn);
+				}
+				else
+					echo "Ce coureur est déja présent dans la base";
 			}
 			else{
 				if($prenom == "-1")
