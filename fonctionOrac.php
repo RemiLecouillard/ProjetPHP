@@ -62,7 +62,8 @@ function LireDonnees1($cur,&$tab)
 //---------------------------------------------------------------------------------------------
 // fonctions autres
 function AfficherDonnee1($tab,$nbLignes)
-{
+{ 
+	echo "$nbLignes resultats trouvés<br />\n";
   if ($nbLignes > 0) 
   {
     echo "<table border=\"1\">\n";
@@ -87,7 +88,7 @@ function AfficherDonnee1($tab,$nbLignes)
   {
     echo "Pas de ligne<br />\n";
   } 
-  echo "$nbLignes Lignes lues<br />\n";
+ 
 }
 //---------------------------------------------------------------------------------------------
 function FermerConnexion($conn)

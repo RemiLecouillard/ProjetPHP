@@ -19,6 +19,7 @@
 
 			<label for="code_tdf"> Pays : </label>
 			<select name="code_tdf" id="code_tdf">
+				<option value="" selected> >Code Pays</option>
 				<?php include("codeTdf.php"); ?>
 			</select>
 			</br>
