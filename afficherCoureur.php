@@ -13,26 +13,22 @@
 			<label for="prenom"> Prenom : </label>
 			<input name="prenom" id="prenom"/>
 			</br>
-
-			<label for="anneeNais"> Année de Naissance : </label>
-			<input name="anneeNais" id="anneeNaiss" type="number" />
+<label for="annee_naissance"> Année de Naissance : </label>
+			<input name="annee_naissance" id="annee_naissance" type="number" />
 			</br>
 
-			<label for="pays"> Pays : </label>
-			<select name="pays" id="pays">
-				<option value="FRA"> France</option>
-				<option value="BEL"> Belgique</option>
-				<option value="ESP">Espagne</option>
-				<option value="ALM">Allemagne</option>
+			<label for="code_tdf"> Pays : </label>
+			<select name="code_tdf" id="code_tdf">
+				<?php include("codeTdf.php"); ?>
 			</select>
 			</br>
 
-			<label for="anneePrem"> Année du premier tour : </label>
-			<input name="anneePrem" id="anneePrem" type="number" />
+			<label for="annee_Prem"> Année du premier tour : </label>
+			<input name="annee_Prem" id="annee_Prem" type="number" />
 		
 			</br>
 			Date d'insertion :
-			<input name="dateInser" id="dateInser" type="date" />
+			<input name="date_Insert" id="date_Insert" type="date" />
 			</br>
 			
 			<input name="rechercher" id="rechercher" type="submit" value="rechercher"/>
