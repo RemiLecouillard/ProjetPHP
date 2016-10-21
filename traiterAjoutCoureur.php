@@ -52,7 +52,7 @@ if(isset($_POST["envoyer"])){
 						if(anneeActuel() - $_POST["anneeNais"] < 18)
 							$test = false;
 						if(!empty($_POST["anneePrem"]))
-							if($_POST["anneePrem"] - $_POST["anneeNais"] < 18)
+							if($_POST["anneePrem"] - $_POST["anneeNais"] < 18 || $_POST["anneePrem"] - $_POST["anneeNais"] > 110 )
 								$test = false;
 					}
 						if($test){//Ce test ne marche pas encore
@@ -78,7 +78,8 @@ if(isset($_POST["envoyer"])){
 							$committed = oci_commit($conn);
 							FermerConnexion($conn);
 						}
-						echo "L'age du coureur n'est pas valide";
+						else
+							echo "L'age du coureur n'est pas valide";
 				}
 				else
 					echo "Ce coureur est déja présent dans la base";
