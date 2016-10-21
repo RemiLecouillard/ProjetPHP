@@ -3,38 +3,49 @@
 <html>
 	<head>
 		<meta charset="UTF-8"/>
+		<link rel="stylesheet" href="designForm.css" type="text/CSS" />
 	</head>
 	<body>
+		<?php include("menu.html"); ?>
+		<div class="form-style-2">
+		<div class="form-style-2-heading">Rechercher un coureur</div>
 		<form method="post" action="<?php $_SERVER['PHP_SELF'] ?>" enctype="application/x-www-form-urlencoded" name="afficheCoureur"/>
-			<label for="nom"> Nom : </label>
-			<input name="nom" id="nom"/>
+			<label for="nom"><span> Nom :</span> 
+			<input name="nom" id="nom"/></label>
 			</br>
 
-			<label for="prenom"> Prenom : </label>
-			<input name="prenom" id="prenom"/>
-			</br>
-<label for="annee_naissance"> Année de Naissance : </label>
-			<input name="annee_naissance" id="annee_naissance" type="number" />
+			<label for="prenom"><span> Prenom :</span> 
+			<input name="prenom" id="prenom"/></label>
 			</br>
 
+			<label for="anneeNais"><span> Année de Naissance :</span>
+			<input name="anneeNais" id="anneeNaiss" type="number" /> </label>
+			</br>
+
+<<<<<<< HEAD
 			<label for="code_tdf"> Pays : </label>
 			<select name="code_tdf" id="code_tdf">
 				<option value="" selected> >Code Pays</option>
+=======
+			<label for="pays"><span> Pays : </span>
+			<select name="pays" id="pays">
+>>>>>>> origin/master
 				<?php include("codeTdf.php"); ?>
-			</select>
+			</select></label>
 			</br>
 
-			<label for="annee_Prem"> Année du premier tour : </label>
-			<input name="annee_Prem" id="annee_Prem" type="number" />
+			<label for="anneePrem"><span> Année du premier tour : </span>
+			<input name="anneePrem" id="anneePrem" type="number" /></label>
 		
 			</br>
-			Date d'insertion :
-			<input name="date_Insert" id="date_Insert" type="date" />
+			<label for="dateInser">
+			<span>Date d'insertion :</span>
+			<input name="dateInser" id="dateInser" type="date" /></label>
 			</br>
 			
 			<input name="rechercher" id="rechercher" type="submit" value="rechercher"/>
 		</form>
-		
+		</div>
 	
 		<?php include("traiterAfficherCoureur.php"); ?>
 	</body>
