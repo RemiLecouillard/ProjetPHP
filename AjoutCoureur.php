@@ -1,6 +1,7 @@
 <html>
 	<meta charset='UTF-8'/>
 	<head><link rel="stylesheet" href="designForm.css" type="text/CSS" /></head>
+	<?php include("menu.html"); ?>
 	<div class="form-style-2">
 	<div class="form-style-2-heading">Ajout d'un coureur</div>
 	<form method="post" action= "<?php $_SERVER['PHP_SELF'] ?>" enctype="application/x-www-form-urlencoded" name="ajoutTache">
