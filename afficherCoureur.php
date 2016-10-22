@@ -21,12 +21,9 @@
 			<label for="annee_Naissance"><span> Année de Naissance :</span>
 			<input name="annee_Naissance" id="annee_Naissance" type="number" /> </label>
 			</br>
-
-
-			<label for="code_tdf"> Pays : 
+			<label for="code_tdf"><span> Pays : </span>
 			<select name="code_tdf" id="code_tdf">
-				<option value="" selected> Code Pays</option>
-
+				<option value="" selected>Code Pays</option>
 				<?php include("codeTdf.php"); ?>
 			</select></label>
 			</br>
