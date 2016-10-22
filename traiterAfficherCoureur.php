@@ -1,8 +1,8 @@
 <?php
-include("fonctionOrac.php");
+
 if(isset($_POST["rechercher"])){
-	if(!empty($_POST["nom"]) || !empty($_POST["prenom"]) || !empty($_POST["annee_Nais"]) || !empty($_POST["code_tdf"]) || !empty($_POST["annee_Prem"]) || !empty($_POST["date_Insert"])){
-		$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
+	if(!empty($_POST["nom"]) || !empty($_POST["prenom"]) || !empty($_POST["annee_Naissance"]) || !empty($_POST["code_tdf"]) || !empty($_POST["annee_Prem"]) || !empty($_POST["date_Insert"])){
+		//$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
 		$req = "SELECT * FROM tdf_coureur where";
 		$i=0;
 		foreach($_POST as $cle=>$contenu){

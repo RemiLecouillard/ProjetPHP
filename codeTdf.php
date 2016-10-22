@@ -10,7 +10,7 @@
 	
 	
 	foreach($donnees as $cle=>$contenu){
-		foreach($contenu as $cle=$codeTdf){
+		foreach($contenu as $cle=>$codeTdf){
 		echo "<option value=$codeTdf>$codeTdf</option>";
 		}
 	}

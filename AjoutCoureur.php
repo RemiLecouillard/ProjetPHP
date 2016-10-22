@@ -20,18 +20,7 @@
 
 		<label for="pays"><span> Pays : </span>
 		<select name="pays" id="pays">
-			<option value="FRA">
-				France
-			</option>
-			<option value="BEL">
-				Belgique
-			</option>
-			<option value="ESP">
-				Espagne
-			</option>
-			<option value="ALM">
-				Allemagne
-			</option>
+			<?php include("codeTdf.php"); ?>
 		</select></label>
 
 		<label for="anneePrem"><span> Année du premier tour : </span>
