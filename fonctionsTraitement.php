@@ -7,7 +7,7 @@ function validiteChaine($ch){
 }
 // Seul l'alphabet français, les accents français, les apostrophe, tirets et espaces sont autorisés
 function alphabetFr($ch){
-	if(preg_match("/[^a-zA-Z0-9àâäéèêëïîôöùûüçÉÈÊËÎÏÔÖÛÜÙÂÀÄ' -]|[!$%&]/", $ch)){
+	if(preg_match("/[^a-zA-Z0-9àâäéèêëïîôöùûüçœæÉÈÊËÎÏÔÖÛÜÙÂÀÄŒÆ' -]|[!$%&]/", $ch)){
 		return false;
 	}
 	else{ return true;}
@@ -15,9 +15,8 @@ function alphabetFr($ch){
 
 //La chaine doit contenir des lettres
 function caractereExist($ch){
-	if(preg_match("/[-a-zA-Z0-9àâäéèêëïîôöùûü]/", $ch)){
+	if(preg_match("/[-a-zA-Z0-9àâäéèêëïîôöùûüçœæÉÈÊËÎÏÔÖÛÜÙÂÀÄŒÆ]/", $ch)){
 	return true;
-	
 	}
 	else{
 		return false;}
@@ -57,9 +56,22 @@ function traitementChaine($ch){
 	$ch=plsrsApostrophes($ch);
 	$ch=plsrsEspaces($ch);
 	$ch=SupprimeEspaceAutourTiret($ch);
+	$ch=decolleCarac($ch);
 	return $ch;
 }
 //Tous
+//Les caractères spéciaux collés sont modifiés
+function decolleCarac($ch){
+	if(preg_match("/[œæŒÆ]/", $ch))
+	{
+	
+		$carac = array('/œ/','/æ/','/Œ/','/Æ/');
+		$decolle = array('oe','ae','OE','AE');
+		$ch2 = preg_replace($carac, $decolle, $ch);
+		return $ch2;
+	}	
+	else return $ch;
+}
 
 function transfoApos($ch){
 	$apo = array('\'');
@@ -83,8 +95,6 @@ function plsrsApostrophes($ch){
 	if(strpbrk( "/[']{2,}/",$ch2) ){
 		$ch2=preg_replace ( "/[']{2,}/", "'", $ch2);
 		}
-
-	
 	return $ch2;
 	
 }
@@ -116,7 +126,7 @@ function SupprimeEspaceAutourTiret($ch){
 //S'il y a plus de deux tirets, ils sont remplacés par un double tiret
 function doubleTiretNom($ch){
 	$ch2 = $ch;
-	if(strpbrk( "/[-]{3,}/",$ch2) ){
+	if(strpbrk( $ch2,"/[-]{3,}/") ){
 		$ch2=preg_replace ( "/[-]{3,}/", "--", $ch2);
 		}
 

@@ -33,7 +33,7 @@ function ExecuterRequete($cur)
   //echo "<br>résultat de la requête: $r<br />";
   if (!$r) 
   {  
-	$e = oci_error($stid);  
+	$e = oci_error();  
 	echo htmlentities($e['message']);  
 	exit;
   }

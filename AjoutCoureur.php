@@ -18,7 +18,7 @@
 		<input name="anneeNais" id="anneeNaiss" type="number" /></label>
 		</br>
 
-		<label for="pays"><span> Pays : </span>
+		<label for="pays"><span> Pays : <span class="required">*</span> </span>
 		<select name="pays" id="pays">
 			<option value="" selected> Code Pays</option>
 				<?php include("codeTdf.php"); ?>
