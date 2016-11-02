@@ -68,7 +68,7 @@ function decolleCarac($ch){
 		$carac = array('/œ/','/æ/','/Œ/','/Æ/');
 		$decolle = array('oe','ae','OE','AE');
 		$ch2 = preg_replace($carac, $decolle, $ch);
-		return $ch;
+		return $ch2;
 	}	
 	else return $ch;
 }
