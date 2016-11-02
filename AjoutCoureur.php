@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 	<meta charset='UTF-8'/>
 	<head><link rel="stylesheet" href="designForm.css" type="text/CSS" /></head>
 	<?php include("menu.html"); ?>
@@ -20,12 +20,12 @@
 
 		<label for="pays"><span> Pays : </span>
 		<select name="pays" id="pays">
-<<<<<<< HEAD
+
 			<option value="" selected> Code Pays</option>
 				<?php include("codeTdf.php"); ?>
-=======
+
 			<?php include("codeTdf.php"); ?>
->>>>>>> origin/master
+
 		</select></label>
 
 		<label for="anneePrem"><span> Année du premier tour : </span>

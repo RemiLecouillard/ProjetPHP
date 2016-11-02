@@ -1,11 +1,8 @@
-<?php
+﻿<?php
 include("traiterPrenom.php");
 include("traiterNom.php");
 include("fonctionsTraitement.php");
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 
 function calculerNumeroCoureur(){
 	$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
