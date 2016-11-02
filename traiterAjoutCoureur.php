@@ -2,7 +2,7 @@
 include("traiterPrenom.php");
 include("traiterNom.php");
 include("fonctionsTraitement.php");
-include("fonctionOrac.php");
+
 
 function calculerNumeroCoureur(){
 	$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');

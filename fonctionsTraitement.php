@@ -36,7 +36,7 @@ function plsrsDoubleTiretNom($ch){
 		
 		$tab = explode("--", $ch);
 		
-		if(count($tab)>2){
+		if(count($tab)>2){ 
 			return false;
 		}
 		else

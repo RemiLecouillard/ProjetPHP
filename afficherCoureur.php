@@ -22,15 +22,11 @@
 			<input name="anneeNais" id="anneeNaiss" type="number" /> </label>
 			</br>
 
-<<<<<<< HEAD
-			<label for="code_tdf"> Pays : </label>
+
+			<label for="code_tdf"> Pays :
 			<select name="code_tdf" id="code_tdf">
-				<option value="" selected> >Code Pays</option>
-=======
-			<label for="pays"><span> Pays : </span>
-			<select name="pays" id="pays">
->>>>>>> origin/master
-				<?php include("codeTdf.php"); ?>
+				<option value="" selected> Code Pays</option>
+				<!--<?php include("codeTdf.php"); ?>-->
 			</select></label>
 			</br>
 
