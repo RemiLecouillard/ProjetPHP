@@ -78,6 +78,7 @@ function AfficherDonnee1($tab,$nbLignes)
       echo "<tr>\n";
       foreach ($tab as $data) // lecture des enregistrements de chaque colonne
 	  {
+		 $data[$i] = utf8_encode($data[$i]);
         echo "<td>$data[$i]</td>\n";
       }
       echo "</tr>\n";
