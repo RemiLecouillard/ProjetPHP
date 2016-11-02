@@ -18,25 +18,32 @@
 			<input name="prenom" id="prenom"/></label>
 			</br>
 
-			<label for="anneeNais"><span> Année de Naissance :</span>
-			<input name="anneeNais" id="anneeNaiss" type="number" /> </label>
+			<label for="annee_Naissance"><span> Année de Naissance :</span>
+			<input name="annee_Naissance" id="annee_Naissance" type="number" /> </label>
 			</br>
+<<<<<<< HEAD
 
 
 			<label for="code_tdf"> Pays :
 			<select name="code_tdf" id="code_tdf">
 				<option value="" selected> Code Pays</option>
 				<!--<?php include("codeTdf.php"); ?>-->
+=======
+			<label for="code_tdf"><span> Pays : </span>
+			<select name="code_tdf" id="code_tdf">
+				<option value="" selected>Code Pays</option>
+				<?php include("codeTdf.php"); ?>
+>>>>>>> origin/master
 			</select></label>
 			</br>
 
-			<label for="anneePrem"><span> Année du premier tour : </span>
-			<input name="anneePrem" id="anneePrem" type="number" /></label>
+			<label for="annee_Prem"><span> Année du premier tour : </span>
+			<input name="annee_Prem" id="annee_Prem" type="number" /></label>
 		
 			</br>
-			<label for="dateInser">
+			<label for="date_Insert">
 			<span>Date d'insertion :</span>
-			<input name="dateInser" id="dateInser" type="date" /></label>
+			<input name="date_Insert" id="date_Insert" type="date" placeholder="jj/mm/aa" /></label>
 			</br>
 			
 			<input name="rechercher" id="rechercher" type="submit" value="rechercher"/>

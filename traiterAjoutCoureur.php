@@ -2,7 +2,10 @@
 include("traiterPrenom.php");
 include("traiterNom.php");
 include("fonctionsTraitement.php");
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 
 function calculerNumeroCoureur(){
 	$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
@@ -18,6 +21,7 @@ function calculerNumeroCoureur(){
 function regarderDejaPresent($nom, $prenom){
 	$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
 	$req = "SELECT count(*) FROM tdf_coureur where nom ='".$nom."' and prenom ='".$prenom."'";
+	$req = utf8_decode($req);
 	$cur = PreparerRequete($conn,$req);
 	$res = ExecuterRequete($cur);
 	$nb = LireDonnees1($cur,$donnees);
@@ -28,7 +32,7 @@ function regarderDejaPresent($nom, $prenom){
 	else
 		return true;
 }
-function anneeActuel(){
+function anneeActuel(){ 
 	return 2016;
 }
 
@@ -43,10 +47,8 @@ if(isset($_POST["envoyer"])){
 			$prenom = traiterPrenom($prenom);
 			$nom = traiterNom($nom);
 			if($prenom != "-1" && $nom != "-1"){
-				if($prenom != $_POST["prenom"])
-					echo "Le prénom que vous avez rentré a été modifié en ".$prenom."</br>";
-				if($nom != $_POST["nom"])
-					echo "Le nom que vous avez rentré a été modifié en ".$nom."</br>";
+				$prenom = doublerApostrophe($prenom);
+				$nom = doublerApostrophe($nom);
 				if(!regarderDejaPresent($nom, $prenom)){
 					if(!empty($_POST["anneeNais"])){
 						if(anneeActuel() - $_POST["anneeNais"] < 18)
@@ -61,6 +63,7 @@ if(isset($_POST["envoyer"])){
 							$code = calculerNumeroCoureur();
 							$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
 							
+
 							//création de la requete
 							$req = "";
 							if(!empty($_POST["anneeNais"]) && !empty($_POST["anneePrem"]))
@@ -71,12 +74,18 @@ if(isset($_POST["envoyer"])){
 								$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, annee_prem, DATE_INSERT, COMPTE_ORACLE) values (".$code.",'".$nom."','".$prenom."','".$_POST["pays"]."',".$_POST["anneePrem"].", sysdate, 'ETU2_58')";
 							else
 								$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, DATE_INSERT, COMPTE_ORACLE) values (".$code.",'".$nom."','".$prenom."','".$_POST["pays"]."', sysdate, 'ETU2_58')";
+							echo $req;
 							$req = utf8_decode($req);
 							
 							$cur = PreparerRequete($conn,$req);
 							$res = ExecuterRequete($cur);
 							$committed = oci_commit($conn);
 							FermerConnexion($conn);
+							if($prenom != $_POST["prenom"])
+								echo "Le prénom que vous avez rentré a été modifié en ".$prenom."</br>";
+							if($nom != $_POST["nom"])
+								echo "Le nom que vous avez rentré a été modifié en ".$nom."</br>";
+							echo "le joueur a été ajouté";
 						}
 						else
 							echo "L'age du coureur n'est pas valide";

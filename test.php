@@ -1,5 +1,5 @@
 <?php
-//include("fonctionsTraitement.php");
+include("fonctionOrac.php");
 include("traiterAjoutCoureur.php");
 //include("traiterNom.php");
 //include("traiterPrenom.php");
@@ -54,19 +54,14 @@ $res = ExecuterRequete($cur);
 $r2=88;
 $res = ExecuterRequete($cur);
 echo "Nouvelle donnée insérée :$rid <hr />";*/
-				$code = calculerNumeroCoureur();
-				$nom = "Fremont";
-				$prenom = "Xaviere";
-				$date1 = 1980;
-				$date2 = 2000;
-				$pays = "FRA";
-				$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
-				$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, annee_naissance, annee_prem) values (".$code.",'".$nom."','".$prenom."','".$pays."',".$date1.",".$date2.")";
-				echo $req."</br>";
-				$req = utf8_decode($req);
-				echo $req;
-				$cur = PreparerRequete($conn,$req);
-				$res = ExecuterRequete($cur);
-				$committed = oci_commit($conn);
-				FermerConnexion($conn);
+
+$ch = "'salut'salut'";
+$ch = doublerApostrophe($ch);
+echo $ch."</br>";
+$ch = "'salut'salut";
+$ch = doublerApostrophe($ch);
+echo $ch."</br>";
+$ch = "salut'salut'";
+$ch = doublerApostrophe($ch);
+echo $ch;
 ?>
