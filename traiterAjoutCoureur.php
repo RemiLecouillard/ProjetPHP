@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include("traiterPrenom.php");
 include("traiterNom.php");
 include("fonctionsTraitement.php");

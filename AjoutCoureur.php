@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 	<meta charset='UTF-8'/>
 	<head><link rel="stylesheet" href="designForm.css" type="text/CSS" /></head>
 	<?php include("menu.html"); ?>
