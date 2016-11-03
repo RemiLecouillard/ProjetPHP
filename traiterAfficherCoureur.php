@@ -26,7 +26,8 @@ function afficherListe($tab,$nbLignes){
         echo "<td>$data[$i]</td>\n";
 		$ctr++;
       }
-      echo "<td><input type='submit'value ='supprimer' name='supp'/></td></tr></form>\n";
+      echo "<td><input type='submit'value ='supprimer' name='supp'/></td></form>\n";
+	  include("voirToutCou.htm");
     }
     echo "</table>\n";
   } 

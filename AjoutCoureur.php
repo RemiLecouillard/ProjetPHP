@@ -20,7 +20,7 @@
 
 		<label for="pays"><span> Pays : <span class="required">*</span> </span>
 		<select name="pays" id="pays">
-			<option value="" selected> Code Pays</option>
+			<option value="" selected> Pays</option>
 				<?php include("codeTdf.php"); ?>
 		</select></label>
 
