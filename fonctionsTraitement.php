@@ -7,7 +7,7 @@ function validiteChaine($ch){
 }
 // Seul l'alphabet français, les accents français, les apostrophe, tirets et espaces sont autorisés
 function alphabetFr($ch){
-	if(preg_match("/[^a-zA-Z0-9àâäéèêëïîôöùûüçœæÉÈÊËÎÏÔÖÛÜÙÂÀÄŒÆ' -]|[!$%&]/", $ch)){
+	if(preg_match("/[^a-zA-Z0-9àâäéèêëïîôöùûüçœæñÑÉÈÊËÎÏÔÖÛÜÙÂÀÄŒÆ' -]|[!$%&]/", $ch)){
 		return false;
 	}
 	else{ return true;}
@@ -15,7 +15,7 @@ function alphabetFr($ch){
 
 //La chaine doit contenir des lettres
 function caractereExist($ch){
-	if(preg_match("/[-a-zA-Z0-9àâäéèêëïîôöùûüçœæÉÈÊËÎÏÔÖÛÜÙÂÀÄŒÆ]/", $ch)){
+	if(preg_match("/[-a-zA-Z0-9àâäéèêëïîôöùûüçœæñÑÉÈÊËÎÏÔÖÛÜÙÂÀÄŒÆ]/", $ch)){
 	return true;
 	}
 	else{
@@ -65,8 +65,8 @@ function decolleCarac($ch){
 	if(preg_match("/[œæŒÆ]/", $ch))
 	{
 	
-		$carac = array('/œ/','/æ/','/Œ/','/Æ/');
-		$decolle = array('oe','ae','OE','AE');
+		$carac = array('/œ/','/æ/','/Œ/','/Æ/','/ñ/','/Ñ/');
+		$decolle = array('oe','ae','OE','AE','n','N');
 		$ch2 = preg_replace($carac, $decolle, $ch);
 		return $ch2;
 	}	
