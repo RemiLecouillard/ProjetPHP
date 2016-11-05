@@ -1,18 +1,19 @@
 <?php
 	$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
-	$req = "SELECT distinct code_tdf FROM tdf_coureur";
+	$req = "SELECT code_tdf FROM tdf_pays";
 	$req = utf8_decode($req);
 	$cur = PreparerRequete($conn,$req);
 	$res = ExecuterRequete($cur);
 	$nb = LireDonnees1($cur,$donnees);
 	
-	
-	
-	foreach($donnees as $cle=>$contenu){
-		foreach($contenu as $cle=>$codeTdf){
-		echo "<option value='$codeTdf'";
-		VerifSelect("code_tdf",$codeTdf);
-		echo ">$codeTdf</option>";
+
+	foreach($donnees as $liste){
+			
+			$nom=$liste["NOM"];
+			$code=$liste["CODE"];
+			echo "<option value=$code ";
+			VerifSelect("code_tdf",$codeTdf);
+			echo ">$nom </option>";
 		}
 	}
 

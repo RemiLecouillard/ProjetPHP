@@ -40,6 +40,7 @@ function afficherListe($tab,$nbLignes){
       }
 	  echo "<td><input type='submit'value ='modifier' name='modif'/></td>";
       echo "<td><input type='submit'value ='supprimer' name='supp'/></td></tr></form>\n";
+	  include("voirToutCou.htm");
     }
     echo "</table>\n";
   } 
