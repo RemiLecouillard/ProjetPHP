@@ -32,9 +32,35 @@ function anneeActuel(){
 	return 2016;
 }
 
-if(isset($_POST["envoyer"])){
+function ajoutCoureur($nom, $prenom, $code){
+	$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
+	//création de la requete
+	$req = "";
+	if(!empty($_POST["anneeNais"]) && !empty($_POST["anneePrem"]))
+		$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, annee_naissance, annee_prem, DATE_INSERT, COMPTE_ORACLE) values (".$code.",'".$nom."','".$prenom."','".$_POST["code_tdf"]."',".$_POST["anneeNais"].",".$_POST["anneePrem"].", sysdate, 'ETU2_58')";
+	else if(!empty($_POST["anneeNais"]))
+		$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, annee_naissance, DATE_INSERT, COMPTE_ORACLE) values (".$code.",'".$nom."','".$prenom."','".$_POST["code_tdf"]."',".$_POST["anneeNais"].", sysdate, 'ETU2_58')";
+	else if(!empty($_POST["anneePrem"]))
+		$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, annee_prem, DATE_INSERT, COMPTE_ORACLE) values (".$code.",'".$nom."','".$prenom."','".$_POST["code_tdf"]."',".$_POST["anneePrem"].", sysdate, 'ETU2_58')";
+	else
+		$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, DATE_INSERT, COMPTE_ORACLE) values (".$code.",'".$nom."','".$prenom."','".$_POST["code_tdf"]."', sysdate, 'ETU2_58')";
+	//echo $req;
+	$req = utf8_decode($req);
+	$cur = PreparerRequete($conn,$req);
+	$res = ExecuterRequete($cur);
+	$committed = oci_commit($conn);
+	FermerConnexion($conn);
+	if($prenom != $_POST["prenom"])
+		echo "Le prénom que vous avez rentré a été modifié en ".$prenom."</br>";
+	if($nom != $_POST["nom"])
+		echo "Le nom que vous avez rentré a été modifié en ".$nom."</br>";
+	echo "le joueur a été ajouté";
+	
+}
+
+if(isset($_POST["envoyer"]) || isset($_POST['modifier'])){
 	$test = true;
-	if(!empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["pays"])){
+	if(!empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["code_tdf"])){
 		$nom = $_POST["nom"];
 		$prenom = $_POST["prenom"];
 		if($prenom == "lance" && $nom == "armstrong")
@@ -53,35 +79,13 @@ if(isset($_POST["envoyer"])){
 							if($_POST["anneePrem"] - $_POST["anneeNais"] < 18 || $_POST["anneePrem"] - $_POST["anneeNais"] > 110 )
 								$test = false;
 					}
-						if($test){//Ce test ne marche pas encore
+						if($test){
 
 							//Insertion dans la base
-							$code = calculerNumeroCoureur();
-							$conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
-							
-
-							//création de la requete
-							$req = "";
-							if(!empty($_POST["anneeNais"]) && !empty($_POST["anneePrem"]))
-								$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, annee_naissance, annee_prem, DATE_INSERT, COMPTE_ORACLE) values (".$code.",'".$nom."','".$prenom."','".$_POST["pays"]."',".$_POST["anneeNais"].",".$_POST["anneePrem"].", sysdate, 'ETU2_58')";
-							else if(!empty($_POST["anneeNais"]))
-								$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, annee_naissance, DATE_INSERT, COMPTE_ORACLE) values (".$code.",'".$nom."','".$prenom."','".$_POST["pays"]."',".$_POST["anneeNais"].", sysdate, 'ETU2_58')";
-							else if(!empty($_POST["anneePrem"]))
-								$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, annee_prem, DATE_INSERT, COMPTE_ORACLE) values (".$code.",'".$nom."','".$prenom."','".$_POST["pays"]."',".$_POST["anneePrem"].", sysdate, 'ETU2_58')";
-							else
-								$req = "Insert into tdf_coureur(n_coureur, nom, prenom, code_tdf, DATE_INSERT, COMPTE_ORACLE) values (".$code.",'".$nom."','".$prenom."','".$_POST["pays"]."', sysdate, 'ETU2_58')";
-							echo $req;
-							$req = utf8_decode($req);
-							
-							$cur = PreparerRequete($conn,$req);
-							$res = ExecuterRequete($cur);
-							$committed = oci_commit($conn);
-							FermerConnexion($conn);
-							if($prenom != $_POST["prenom"])
-								echo "Le prénom que vous avez rentré a été modifié en ".$prenom."</br>";
-							if($nom != $_POST["nom"])
-								echo "Le nom que vous avez rentré a été modifié en ".$nom."</br>";
-							echo "le joueur a été ajouté";
+							if(isset($_POST["envoyer"])){
+								$code = calculerNumeroCoureur();
+								ajoutCoureur($nom, $prenom, $code);
+							}
 						}
 						else
 							echo "L'age du coureur n'est pas valide";
@@ -95,11 +99,7 @@ if(isset($_POST["envoyer"])){
 				if($nom == "-1")
 					echo "</br> le nom rentré n'est pas valide";
 			}
-			
-
-			
 		}
-
 	}
 	else
 		echo "</br>Veuillez rentrer tout les champs.";
