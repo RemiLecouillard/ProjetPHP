@@ -9,12 +9,11 @@
 	
 	
 	
-	foreach($donnees as $cle=>$contenu){
-		
-			foreach($contenu as $cle=>$codeTdf){
+	foreach($donnees as $liste){
 			
-			echo "<option value=$codeTdf>$codeTdf </option>";
-			
+			$nom=$liste["NOM"];
+			$code=$liste["CODE"];
+			echo "<option value=$code>$nom </option>";
 		}
 	}
 
