@@ -11,21 +11,34 @@ function afficherListe($tab,$nbLignes){
     {
       echo "<th>$key</th>\n";
     }
-	echo "<th></th>";
+	echo "<th></th><th></th>";
     echo "</tr>\n";
     for ($i = 0; $i < $nbLignes; $i++) // balayage de toutes les lignes
     {
 		$ctr = 0;
-      echo "<form method='post' action='supCour.php' enctype='application/x-www-form-urlencoded' name='supp'><tr>\n";
+      echo "<form method='post' action='action.php' enctype='application/x-www-form-urlencoded' name='supp'><tr>\n";
       foreach ($tab as $data) // lecture des enregistrements de chaque colonne
 	  {
 		$data[$i] = utf8_encode($data[$i]);
 			if($ctr == 0){
-			  echo "<input type='hidden' name='num' value='$data[$i]'/>";
+			  echo '<input type="hidden" name="N_COUREUR" value="'.$data[$i].'"/>';
 		  }
+		  else if($ctr == 1)
+			echo '<input type="hidden" name="NOM" value="'.$data[$i].'"/>';
+		  else if($ctr == 2)
+			echo '<input type="hidden" name="PRENOM" value="'.$data[$i].'"/>';
+		  else if($ctr == 3)
+			echo '<input type="hidden" name="ANNEE_NAISSANCE" value="'.$data[$i].'"/>';
+		  else if($ctr == 4)
+			echo '<input type="hidden" name="code_tdf" value="'.$data[$i].'"/>';
+		  else if($ctr == 5)
+			echo '<input type="hidden" name="ANNEE_PREM" value="'.$data[$i].'"/>';
+		  else if($ctr == 7)
+			echo '<input type="hidden" name="DATE_INSERT" value="'.$data[$i].'"/>';
         echo "<td>$data[$i]</td>\n";
 		$ctr++;
       }
+	  echo "<td><input type='submit'value ='modifier' name='modif'/></td>";
       echo "<td><input type='submit'value ='supprimer' name='supp'/></td></tr></form>\n";
     }
     echo "</table>\n";
