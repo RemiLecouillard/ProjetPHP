@@ -17,9 +17,11 @@ if(isset($_POST['modif']) || isset($_POST['modifier'])){
   include("modifCoureur.php");
   if(isset($_POST['modifier'])){
     include("traiterAjoutCoureur.php");
-    echo $prenom.$nom;
-    echo "on est là";
-    echo $_POST['N_COUREUR'];
+    try{
+      ajoutable();
+    }catch (Exception $e) {
+      echo 'Erreur : '.$e->getMessage()."\n";
+    };
   }
   
 }

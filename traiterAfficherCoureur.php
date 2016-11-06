@@ -9,9 +9,12 @@ function afficherListe($tab,$nbLignes){
     echo "<tr>\n";
     foreach ($tab as $key => $val)  // lecture des noms de colonnes
     {
-      echo "<th>$key</th>\n";
+      if($key == "N_COUREUR")
+       echo "<th style='display:none;'>$key</th>\n";
+      else
+        echo "<th>$key</th>\n";
     }
-  echo "<th></th><th></th>";
+  echo "<th></th><th></th><th></th>";
     echo "</tr>\n";
     for ($i = 0; $i < $nbLignes; $i++) // balayage de toutes les lignes
     {
@@ -35,6 +38,9 @@ function afficherListe($tab,$nbLignes){
       echo '<input type="hidden" name="ANNEE_PREM" value="'.$data[$i].'"/>';
       else if($ctr == 7)
       echo '<input type="hidden" name="DATE_INSERT" value="'.$data[$i].'"/>';
+      if($ctr == 0)
+        echo "<td style='display:none;'>$data[$i]</td>\n";
+      else
         echo "<td>$data[$i]</td>\n";
     $ctr++;
       }
