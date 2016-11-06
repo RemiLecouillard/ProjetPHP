@@ -87,23 +87,30 @@ function anneeActuel(){
         $code = calculerNumeroCoureur();
         ajoutCoureur($nom, $prenom, $code);
       }
+      //ce fichier s'occupe également de la modification des coureurs
       if(isset($_POST['modifier'])){
+        if(($_POST['EXNOM'] != $nom || $_POST['EXPRENOM'] != $prenom) && regarderDejaPresent($nom, $prenom))
+          throw new Exception('Ce coureur est déja présent');
         $req = "";
         if(!empty($_POST["ANNEE_NAISSANCE"]) && !empty($_POST["ANNEE_PREM"]))
-          $req = "update tdf_coureur SET NOM='".$_POST['NOM']."', PRENOM='".$_POST['PRENOM']."', ANNEE_NAISSANCE=".$_POST['ANNEE_NAISSANCE'].", code_tdf='".$_POST['code_tdf']."', ANNEE_PREM=".$_POST['ANNEE_PREM']." where N_COUREUR = ".$_POST['N_COUREUR'];
+          $req = "update tdf_coureur SET NOM='".$nom."', PRENOM='".$prenom."', ANNEE_NAISSANCE=".$_POST['ANNEE_NAISSANCE'].", code_tdf='".$_POST['code_tdf']."', ANNEE_PREM=".$_POST['ANNEE_PREM']." where N_COUREUR = ".$_POST['N_COUREUR'];
         else if(!empty($_POST["ANNEE_NAISSANCE"]))
-          $req = "update tdf_coureur SET NOM='".$_POST['NOM']."', PRENOM='".$_POST['PRENOM']."', ANNEE_NAISSANCE=".$_POST['ANNEE_NAISSANCE'].", code_tdf='".$_POST['code_tdf']."' where N_COUREUR = ".$_POST['N_COUREUR'];
+          $req = "update tdf_coureur SET NOM='".$nom."', PRENOM='".$prenom."', ANNEE_NAISSANCE=".$_POST['ANNEE_NAISSANCE'].", code_tdf='".$_POST['code_tdf']."' where N_COUREUR = ".$_POST['N_COUREUR'];
         else if(!empty($_POST["ANNEE_PREM"]))
-          $req = "update tdf_coureur SET NOM='".$_POST['NOM']."', PRENOM='".$_POST['PRENOM']."', code_tdf='".$_POST['code_tdf']."', ANNEE_PREM=".$_POST['ANNEE_PREM']." where N_COUREUR = ".$_POST['N_COUREUR'];
+          $req = "update tdf_coureur SET NOM='".$nom."', PRENOM='".$prenom."', code_tdf='".$_POST['code_tdf']."', ANNEE_PREM=".$_POST['ANNEE_PREM']." where N_COUREUR = ".$_POST['N_COUREUR'];
         else
-          $req = "update tdf_coureur SET NOM='".$_POST['NOM']."', PRENOM='".$_POST['PRENOM']."', code_tdf='".$_POST['code_tdf']."' where N_COUREUR = ".$_POST['N_COUREUR'];
-        echo "Le coureur a été modifié";
+          $req = "update tdf_coureur SET NOM='".$nom."', PRENOM='".$prenom."', code_tdf='".$_POST['code_tdf']."' where N_COUREUR = ".$_POST['N_COUREUR'];
         $conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
         $req = utf8_decode($req);
         $cur = PreparerRequete($conn,$req);
         $res = ExecuterRequete($cur);
         oci_commit($conn);
         FermerConnexion($conn);
+        if($prenom != $_POST["PRENOM"])
+          echo "Le prénom que vous avez rentré a été modifié en ".$prenom."</br>";
+        if($nom != $_POST["NOM"])
+          echo "Le nom que vous avez rentré a été modifié en ".$nom."</br>";
+        echo "Le coureur a été modifié";
       }
     }
     

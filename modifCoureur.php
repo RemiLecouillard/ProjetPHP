@@ -9,10 +9,12 @@
     <input type="hidden" name="N_COUREUR" value="<?php verifierRempli('N_COUREUR') ?>"/>
     <label for="NOM"><span>Nom : <span class="required">*</span></span>
     <input name="NOM" id="NOM" value="<?php verifierRempli('NOM') ?>"/></label>
+    <input type ="hidden" name="EXNOM" id="EXNOM" value="<?php verifierRempli('NOM') ?>"/>
     </br>
 
     <label for="PRENOM"><span>Prénom : <span class="required">*</span></span>
     <input name="PRENOM" id="PRENOM" value="<?php verifierRempli('PRENOM') ?>"/></label>
+    <input type ="hidden" name="EXPRENOM" id="EXPRENOM" value="<?php verifierRempli('PRENOM') ?>"/>
     </br>
 
     <label for="ANNEE_NAISSANCE"><span> Année de Naissance : </span>
