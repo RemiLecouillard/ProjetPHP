@@ -7,12 +7,12 @@
   $nb = LireDonnees1($cur,$donnees);
   $i = 0;
   while($i < count($donnees["NOM"])){
-     $nom=$donnees["NOM"][$i];
-     $code=$donnees["CODE_TDF"][$i];
-     echo "<option value=$code ";
-     VerifSelect("code_tdf",$donnees["CODE_TDF"][$i]);
-     echo ">$nom </option>";
-     $i = $i + 1;
- }
-
-?>
+    $nom=$donnees["NOM"][$i];
+    $code=$donnees["CODE_TDF"][$i];
+    echo "<option value=$code ";
+    VerifSelect("code_tdf",$donnees["CODE_TDF"][$i]);
+    echo ">$nom </option>";
+    $i = $i + 1;
+  }
+  
+  ?>

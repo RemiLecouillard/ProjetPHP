@@ -1,36 +1,36 @@
 <?php
-include("traiterPrenom.php");
-include("traiterNom.php");
-include("fonctionsTraitement.php");
-
-function calculerNumeroCoureur(){
-  $conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
-  $req = "SELECT max(n_coureur)+1 FROM tdf_coureur";
-  $cur = PreparerRequete($conn,$req);
-  $res = ExecuterRequete($cur);
-  $nb = LireDonnees1($cur,$donnees);
-  $committed = oci_commit($conn);
-  FermerConnexion($conn);
-  return $donnees['MAX(N_COUREUR)+1'][0];
-}
-
-function regarderDejaPresent($nom, $prenom){
-  $conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
-  $req = "SELECT count(*) FROM tdf_coureur where nom ='".$nom."' and prenom ='".$prenom."'";
-  $req = utf8_decode($req);
-  $cur = PreparerRequete($conn,$req);
-  $res = ExecuterRequete($cur);
-  $nb = LireDonnees1($cur,$donnees);
-  $committed = oci_commit($conn);
-  FermerConnexion($conn);
-  if($donnees['COUNT(*)'][0] == 0)
-    return false;
-  else
-    return true;
-}
-function anneeActuel(){ 
-  return 2016;
-}
+  include("traiterPrenom.php");
+  include("traiterNom.php");
+  include("fonctionsTraitement.php");
+  
+  function calculerNumeroCoureur(){
+    $conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
+    $req = "SELECT max(n_coureur)+1 FROM tdf_coureur";
+    $cur = PreparerRequete($conn,$req);
+    $res = ExecuterRequete($cur);
+    $nb = LireDonnees1($cur,$donnees);
+    $committed = oci_commit($conn);
+    FermerConnexion($conn);
+    return $donnees['MAX(N_COUREUR)+1'][0];
+  }
+  
+  function regarderDejaPresent($nom, $prenom){
+    $conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
+    $req = "SELECT count(*) FROM tdf_coureur where nom ='".$nom."' and prenom ='".$prenom."'";
+    $req = utf8_decode($req);
+    $cur = PreparerRequete($conn,$req);
+    $res = ExecuterRequete($cur);
+    $nb = LireDonnees1($cur,$donnees);
+    $committed = oci_commit($conn);
+    FermerConnexion($conn);
+    if($donnees['COUNT(*)'][0] == 0)
+      return false;
+    else
+      return true;
+  }
+  function anneeActuel(){ 
+    return 2016;
+  }
   
   function ajoutCoureur($nom, $prenom, $code){
     $conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
@@ -115,5 +115,5 @@ function anneeActuel(){
     }
     
   }
-
-?>
+  
+  ?>

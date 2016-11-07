@@ -5,7 +5,7 @@
   function afficherListe($tab,$nbLignes){
     echo "$nbLignes resultats trouvés<br />\n";
     $ctr = 0;
-    if ($nbLignes > 0)
+    if ($nbLignes > 0) 
     {
       echo "<table border=\"1\">\n";
       echo "<tr>\n";
@@ -53,11 +53,11 @@
              //include("voirToutCou.htm");
            }
       echo "</table>\n";
-    }
-    else
+    } 
+    else 
     {
       echo "Pas de ligne<br />\n";
-    }
+    } 
     
   }
   
@@ -73,10 +73,12 @@
             $req = $req." and ";
           if($cle == "nom"){
             $nom = traiterNom($_POST["nom"]);
+            $nom = doublerApostrophe($nom);
             $req = $req."$cle='$nom'";
           }
           else if($cle == "prenom"){
             $prenom = traiterPrenom($_POST["prenom"]);
+            $prenom = doublerApostrophe($prenom);
             $req = $req." $cle='$prenom'";
           }
           else $req = $req."$cle='$contenu'";
