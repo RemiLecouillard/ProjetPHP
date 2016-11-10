@@ -1,4 +1,9 @@
 <?php
+
+	/************************
+	*    Traitement du Nom  *
+	*************************/
+	
   function traiterNom($ch){
     $ch = transfoApos($ch);
     if(validiteChaine($ch)){

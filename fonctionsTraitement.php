@@ -179,7 +179,9 @@
   
   //-----------------------------------Fonctions de traitement pour les NOMS --------------------------------------------------
   
-  //S'il y a plus de deux tirets, ils sont remplacés par un double tiret
+  /*
+  * Remplacement d'un grand nombre de tiret par des double tirets
+  */
   function doubleTiretNom($ch){
     $ch2 = $ch;
     if(strpbrk( $ch2,"/[-]{3,}/") ){
@@ -191,8 +193,11 @@
     
   }
   
+  /*
+  * Enlèvement des accents
+  *Mise en majuscule
+  */
   
-  //S'il y a des lettres avec accent, on enlève les accents. Le nom est mis en majuscule
   function nomMaj($ch){
     $ch2 = $ch;
     if(preg_match("/[àâäéèêëïîôöùûüÉÈÊËÎÏÔÖÛÜÙÂÀÄ]/", $ch)){
@@ -206,11 +211,12 @@
   }
   
   
-  //Prenom
+   //-----------------------------------Fonctions de traitement pour les PRENOMS --------------------------------------------------
   
-  //S'il y a des espaces ou des tirets, on appelle les fonctions qui mettent des majuscules à chaque mot après un espace ou un tiret ou une apostrophe
-  //sinon on met seulement la première lettre en majuscule
-  //On enlève l'accent de la première lettre pour le mettre en majuscule
+  /*
+  *Fonction générale
+  *Appel des fonctions nécessaires
+  */
   function prenomMaj($ch){
     $ch = mettreMinuscule($ch);
     if(preg_match("/[[:space:]]/", $ch)){
@@ -235,8 +241,10 @@
     
   }
   
-  //Pour chaque terme suivant un apostrophe, on le met en majuscule 
-  
+  /*
+  *Mise en majuscule
+  *Terme suivant un apostrophe
+  */
   function apostropheMaj($ch){
     $tab = explode("'", $ch);
     
@@ -250,6 +258,11 @@
     return $ch2;
     
   }
+  
+  /*
+  *Mise en minuscule
+  *Gestion des accents
+  */
   function mettreMinuscule($ch){
     $accent = array('/É/', '/È/', '/Ê/', '/Ë/', '/Î/', '/Ï/', '/Ô/', '/Ö/', '/Û/', '/Ü/', '/Ù/', '/Â/', '/À/', '/Ä/');
     $replace = array('é','è','ê','ë', 'î', 'ï', 'ô', 'ö', 'û', 'ü', 'ù', 'â', 'à', 'ä');
@@ -258,7 +271,10 @@
     return $ch;
   }
   
-  //Cette fonction sert pour la mise en majuscule --> On remplace les accents par les lettres correspondantes
+  /*
+  *Mise en majuscule de la première lettre
+  *Gestion des accents
+  */
   function premiereLettreAccent($ch){
     if(preg_match("/^[àâäéèêëïîôöùûü]/", $ch)){
       $accent = array('/^à/','/^â/','/^ä/','/^é/','/^è/','/^ê/','/^ë/','/^ï/','/^î/','/^ô/','/^ö/','/^ù/','/^û/','/^ü/', '/^É/', '/^È/', '/^Ê/', '/^Ë/', '/^Î/', '/^Ï/', '/^Ô/', '/^Ö/', '/^Û/', '/^Ü/', '/^Ù/', '/^Â/', '/^À/', '/^Ä/');
@@ -270,8 +286,11 @@
     else return $ch;
   }
   
+  /*
+  *Mise en majuscule
+  *Terme suivant un tiret
+  */
   
-  //Pour chaque terme suivant un tiret, on le met en majuscule 
   function tiretMaj($ch){
     
     $tab = explode("-", $ch);
@@ -285,7 +304,10 @@
     
   }
   
-  //Pour chaque terme suivant un espace, on le met en majuscule 
+  /*
+  *Mise en majuscule
+  *Terme suivant un espace
+  */
   function espaceMaj($ch){
     
     $tab = explode(" ", $ch);

@@ -1,4 +1,10 @@
 <?php
+
+	/*
+	* Liste des pays
+	*Connexion à la base de données
+	*/
+
   $conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
   $req = "SELECT NOM,CODE_TDF  FROM tdf_pays";
   $req = utf8_decode($req);

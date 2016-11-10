@@ -1,8 +1,19 @@
 <?php
+
+	/***************************************
+	*    Gestion de l'ajout des coureurs   *
+	****************************************/
+	
+	/*
+	*Traitement des chaînes de caractère
+	*/
   include("traiterPrenom.php");
   include("traiterNom.php");
   include("fonctionsTraitement.php");
   
+  /*
+  * Calcul du numéro de coureur
+  */
   function calculerNumeroCoureur(){
     $conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
     $req = "SELECT max(n_coureur)+1 FROM tdf_coureur";
@@ -14,6 +25,9 @@
     return $donnees['MAX(N_COUREUR)+1'][0];
   }
   
+  /*
+  * Verification de la présence d'un coureur dans la base
+  */
   function regarderDejaPresent($nom, $prenom){
     $conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
     $req = "SELECT count(*) FROM tdf_coureur where nom ='".$nom."' and prenom ='".$prenom."'";
@@ -32,6 +46,9 @@
     return 2016;
   }
   
+  /*
+  * Ajout d'un coureur dans la page
+  */
   function ajoutCoureur($nom, $prenom, $code){
     $conn = OuvrirConnexion('ETU2_58', 'remixav16','info');
     //création de la requete
@@ -58,6 +75,9 @@
     
   }
   
+  /*
+  * Traitement du formulaire d'ajout
+  */
   function ajoutable(){
     if(isset($_POST["envoyer"]) || isset($_POST['modifier'])){
       $test = true;

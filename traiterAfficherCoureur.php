@@ -1,7 +1,21 @@
+
 <?php
+
+
+	/******************************************
+	*    Gestion de l'affichage des coureurs  *
+	*******************************************/
+	
+	/*
+	*Traitement des chaines de caractère
+	*/
   include("fonctionsTraitement.php");
   include("traiterNom.php");
   include("traiterPrenom.php");
+  
+	/*
+	* Gestion de l'affichage
+	*/
   function afficherListe($tab,$nbLignes){
     echo "$nbLignes resultats trouvés<br />\n";
     $ctr = 0;
@@ -60,6 +74,10 @@
     } 
     
   }
+  
+  /*
+  * Traitement du formulaire de recherche
+  */
   
   if(isset($_POST["rechercher"])){
     if(!empty($_POST["nom"]) || !empty($_POST["prenom"]) || !empty($_POST["annee_Naissance"]) || !empty($_POST["code_tdf"]) || !empty($_POST["annee_Prem"]) || !empty($_POST["date_Insert"])){

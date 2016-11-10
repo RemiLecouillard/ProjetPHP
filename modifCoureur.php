@@ -1,4 +1,4 @@
-
+<!-- Formulaire de modification d'un coureur -->
 <html>
   <meta charset='UTF-8'/>
   <head><link rel="stylesheet" href="designForm.css" type="text/CSS" /></head>

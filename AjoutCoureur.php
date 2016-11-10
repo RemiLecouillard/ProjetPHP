@@ -1,4 +1,7 @@
 <html>
+	
+	<!-- Formulaire pour l'ajout d'un coureur -->
+	
   <meta charset='UTF-8'/>
   <head><link rel="stylesheet" href="designForm.css" type="text/CSS" /></head>
   <?php include("menu.html");

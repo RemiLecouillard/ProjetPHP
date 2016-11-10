@@ -1,5 +1,7 @@
 <?php
-  
+	/************************
+	* Traitement du Prénom  *
+	*************************/
   function traiterPrenom($ch){
     $ch = transfoApos($ch);
     if(validiteChaine($ch)){

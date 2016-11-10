@@ -1,4 +1,4 @@
-
+<!-- Formulaire pour l'affichage d'un coureur -->
 <!DOCTYPE html>
 <html>
   <head>
