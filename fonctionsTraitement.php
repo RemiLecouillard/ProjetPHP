@@ -1,11 +1,28 @@
 <?php
-  //Fonction qui renvoie une erreur
+	/*
+	*Traitement des chaines de caractère et modifications pour le nom et le prénom
+	*/
+	
+	
+	//-------------------------------------------------- Fonctions d'erreurs ---------------------------------------------------------------
+	
+	
+	
+  /*
+  *test de validité de la chaîne
+  *appel de fonction alphabetFr()
+  *appel de fonction caractereExist
+  */
   function validiteChaine($ch){
     if(alphabetFr($ch) && caractereExist($ch))
       return true;
     else return false;
   }
-  // Seul l'alphabet français, les accents français, les apostrophe, tirets et espaces sont autorisés
+  
+	/* 
+	* test alphabet français
+	*accents français, les apostrophe, tirets et espaces autorisés
+	*/
   function alphabetFr($ch){
     if(preg_match("/[^a-zA-Z0-9àâäéèêëïîôöùûüçœæñÑÉÈÊËÎÏÔÖÛÜÙÂÀÄŒÆ' -]|[!$%&]/", $ch)){
       return false;
@@ -13,7 +30,9 @@
     else{ return true;}
   }
   
-  //La chaine doit contenir des lettres
+	/*
+	*test si la chaîne contient des lettres
+	*/
   function caractereExist($ch){
     if(preg_match("/[-a-zA-Z0-9àâäéèêëïîôöùûüçœæñÑÉÈÊËÎÏÔÖÛÜÙÂÀÄŒÆ]/", $ch)){
       return true;
@@ -21,7 +40,11 @@
     else{
       return false;}
   }
-  //faire double tiret interdit
+  
+	/*
+	*test de double tiret
+	*utilisé pour le prenom
+	*/
   function doubleTiretInterdit($ch){
     if(preg_match("/--/", $ch)){
       return false;
@@ -30,7 +53,10 @@
       return true;
   }
   
-  //S'il y a plusieurs doubles tirets, la chaîne est interdite
+	/*
+	*test la présence de plusieurs double tiret
+	*utilisée pour le nom
+	*/
   function plsrsDoubleTiretNom($ch){
     
     $tab = explode("--", $ch);
@@ -42,7 +68,9 @@
       return true;
   }
   
-  //Verification de la longueur après toutes les transformations
+  /*
+  *test la longueur de la chaîne après tous les traitementChaine
+  */
   function longChaine($ch){
     
     if(iconv_strlen($ch)>31)
@@ -51,7 +79,12 @@
     
   }
   
-  //Fonctions de transformation de la chaine ----------------------------------------------------------------------------
+  //---------------------------------------------------------Fonctions de transformation de la chaine -------------------------------------
+  
+	/*
+	* fonction générale 
+	* appel de fonctions de traitement pour les noms et prénoms
+	*/
   function traitementChaine($ch){
     $ch=plsrsApostrophes($ch);
     $ch=plsrsEspaces($ch);
@@ -59,8 +92,11 @@
     $ch=decolleCarac($ch);
     return $ch;
   }
-  //Tous
-  //Les caractères spéciaux collés sont modifiés
+  
+  /*
+  *Modification de caractères non-valides mais autorisés
+  *lettres collée, n tilde
+  */
   function decolleCarac($ch){
     if(preg_match("/[œæŒÆ]/", $ch))
     {
@@ -73,13 +109,19 @@
     else return $ch;
   }
   
+	/*
+	*Transformations en apostrophes autorisées
+	*/
   function transfoApos($ch){
     $apo = array('\'');
     $truc = array('/‘/');
     $ch2 = preg_replace($truc, $apo, $ch);
     return $ch2;
   }
-  //Les premiers et derniers termes doivent être des lettres ou des apostrophes
+  /*
+  * Suppression des caractères de début et de fin 
+  * Utilisé s'ils sont autres que des lettres ou apostrophes
+  */
   function premierTerme($ch){
     $ch2 = $ch;
     if(strlen($ch2) > 1){
@@ -95,7 +137,11 @@
     return $ch2;
   }
   
-  //S'il y a plusieurs apostrophes ils sont remplacés par une simple
+  /*
+  * Les apostrophes doublés sont remplacés par une simple apostrophe
+  * Utilisation lors de l'entrée du nom par l'utilisateur
+  * Utilisation lors de la sortie de la base de donnée
+  */
   function plsrsApostrophes($ch){
     $ch2 = $ch;
     if(strpbrk( "/[']{2,}/",$ch2) ){
@@ -105,7 +151,9 @@
     
   }
   
-  //S'il y a plusieurs espaces ils sont remplacés par un seul
+	/*
+	* Doubles espaces remplacés par un simple
+	*/
   function plsrsEspaces($ch){
     $ch2 = $ch;
     if(strpbrk( "/[[:space:]]{2,}/",$ch2) ){
@@ -116,7 +164,9 @@
     
   }
   
-  //Les espaces autour d'un tiret ou double tiret sont supprimés
+  /*
+  * Suppression des espaces autour des tirets
+  */
   function SupprimeEspaceAutourTiret($ch){
     
     $tab = explode("-", $ch);
@@ -127,7 +177,7 @@
     return $ch2;
   }
   
-  //Nom
+  //-----------------------------------Fonctions de traitement pour les NOMS --------------------------------------------------
   
   //S'il y a plus de deux tirets, ils sont remplacés par un double tiret
   function doubleTiretNom($ch){

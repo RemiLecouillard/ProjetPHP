@@ -1,4 +1,7 @@
-<?php
+<?php 
+	/* 
+	*Connexion à la base de donnée
+	*/
   
   $db = "oci:dbname=info;charset=WE8ISO8859P15";
   $dbUserName = "ETU2_58".
@@ -9,6 +12,7 @@
     $requete="INSERT INTO :table VALUES(); ";
     
   }
+  
   
   function connectPdo($db, $dbUserName, $dbPass){
     try
